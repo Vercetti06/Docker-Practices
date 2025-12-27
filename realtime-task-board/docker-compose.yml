@@ -1,0 +1,34 @@
+services:
+  client:
+    build: ./client
+    container_name: rtb_client
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  server:
+    build: ./server
+    container_name: rtb_server
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/realtimeboard
+    expose:
+      - "5000"
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7
+    container_name: rtb_mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=realtimeboard
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+
