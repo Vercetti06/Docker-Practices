@@ -101,12 +101,13 @@ docker compose down -v # Stop + delete database
 
 ## 🔍 Docker Networking
 **Docker Compose AUTO-creates** `realtime-task-board_default` network:
-
+```
 Host:80 ──"ports:80:80"──→ client:80 (172.20.0.2) ← Nginx
 ↓ proxy_pass
 server:5000 (172.20.0.3) ← API
 ↓ MONGO_URI
 mongodb:27017 (172.20.0.4)
+```
 
 ## 👨‍💻 Core Implementation
 
